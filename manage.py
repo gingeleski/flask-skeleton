@@ -25,33 +25,33 @@ COV = coverage.coverage(
 )
 COV.start()
 
-@cli.command()
+@cli.command('create_db')
 def create_db():
     db.drop_all()
     db.create_all()
     db.session.commit()
 
 
-@cli.command()
+@cli.command('drop_db')
 def drop_db():
     """Drops the db tables."""
     db.drop_all()
 
 
-@cli.command()
+@cli.command('create_admin')
 def create_admin():
     """Creates the admin user."""
     db.session.add(User(email='ad@min.com', password='admin', admin=True))
     db.session.commit()
 
 
-@cli.command()
+@cli.command('create_data')
 def create_data():
     """Creates sample data."""
     pass
 
 
-@cli.command()
+@cli.command('test')
 def test():
     """Runs the unit tests without test coverage."""
     tests = unittest.TestLoader().discover('project/tests', pattern='test*.py')
@@ -61,7 +61,7 @@ def test():
     return 1
 
 
-@cli.command()
+@cli.command('cov')
 def cov():
     """Runs the unit tests with coverage."""
     tests = unittest.TestLoader().discover('project/tests')
